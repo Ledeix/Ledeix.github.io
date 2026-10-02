@@ -1,62 +1,211 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rui Yang — robotics, safe reinforcement learning, and computer vision.">
   <title>Rui Yang | Homepage</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 700px;
-      margin: 40px auto;
-      line-height: 1.6;
-      color: #333;
-    }
-    h1 {
-      margin-bottom: 10px;
-    }
-    .profile {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    .profile img {
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
+    :root { --ink:#202124; --muted:#686b70; --line:#d9dce1; --link:#075caa; --accent:#b70dac; --panel:#f7f8fa; }
+    * { box-sizing: border-box; }
+    body { margin:0; color:var(--ink); background:#fff; font:17px/1.62 Arial, Helvetica, sans-serif; }
+    main { width:min(1100px, calc(100% - 40px)); margin:48px auto 80px; }
+    h1, h2, h3, p { margin-top:0; }
+    h1 { margin-bottom:8px; font-size:clamp(2rem, 5vw, 3rem); line-height:1.1; }
+    h2 { margin:56px 0 24px; font-size:1.85rem; line-height:1.2; }
+    a { color:var(--link); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    a:focus-visible, button:focus-visible { outline:3px solid #8dc4f5; outline-offset:3px; }
+    .profile { display:grid; grid-template-columns:170px 1fr; align-items:start; gap:30px; }
+    .profile img { width:170px; aspect-ratio:1; object-fit:cover; border-radius:12px; box-shadow:0 5px 18px rgba(0,0,0,.13); }
+    .bio { max-width:790px; }
+    .bio p { margin-bottom:0; }
+    .contact { display:flex; flex-wrap:wrap; gap:8px 22px; margin:24px 0 0; padding:0; list-style:none; }
+    .publications { display:grid; gap:34px; }
+    .publication { display:grid; grid-template-columns:230px minmax(0,1fr); gap:24px 30px; padding-bottom:34px; border-bottom:1px solid var(--line); }
+    .publication:last-child { border-bottom:0; }
+    .visual { min-width:0; }
+    .venue { display:block; margin-bottom:10px; padding:3px 10px; color:#fff; background:var(--accent); border-radius:7px; font-weight:700; line-height:1.35; text-align:center; }
+    .preview-toggle { position:relative; display:block; width:100%; padding:0; overflow:hidden; border:0; border-radius:8px; background:#e8eaed; box-shadow:0 5px 14px rgba(0,0,0,.16); cursor:pointer; }
+    .preview-toggle img { display:block; width:100%; aspect-ratio:2.08/1; object-fit:cover; transition:transform .2s ease; }
+    .preview-toggle:hover img { transform:scale(1.025); }
+    .preview-label { position:absolute; right:9px; bottom:9px; padding:4px 9px; border-radius:999px; color:#fff; background:rgba(0,0,0,.68); font-size:.75rem; font-weight:700; }
+    .publication h3 { margin-bottom:7px; font-size:1.38rem; line-height:1.32; }
+    .authors, .where { margin-bottom:5px; }
+    .authors { color:#303238; }
+    .authors strong { text-decoration:underline; text-underline-offset:4px; }
+    .where { color:var(--muted); font-style:italic; }
+    .actions { display:flex; flex-wrap:wrap; gap:9px; margin-top:14px; }
+    .button { display:inline-flex; align-items:center; min-height:38px; padding:6px 15px; border:1px solid #222; border-radius:5px; color:#171717; background:#fff; font:inherit; font-size:.9rem; line-height:1; cursor:pointer; }
+    .button:hover { color:#fff; background:#222; text-decoration:none; }
+    .abstract, .media-preview { display:none; grid-column:1/-1; }
+    .abstract.is-open, .media-preview.is-open { display:block; }
+    .abstract { margin-top:-10px; padding:18px 20px; border-left:4px solid var(--accent); background:var(--panel); }
+    .abstract p { margin:0; }
+    .media-preview { overflow:hidden; border-radius:9px; background:#111; box-shadow:0 7px 22px rgba(0,0,0,.17); }
+    .media-preview video, .media-preview img { display:block; width:100%; max-height:620px; object-fit:contain; }
+    dialog { width:min(680px, calc(100% - 32px)); padding:0; border:0; border-radius:10px; box-shadow:0 18px 60px rgba(0,0,0,.28); }
+    dialog::backdrop { background:rgba(0,0,0,.5); }
+    .dialog-inner { padding:24px; }
+    .dialog-head { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .dialog-head h3 { margin:0; }
+    .icon-button { border:0; background:transparent; font-size:1.6rem; cursor:pointer; }
+    pre { overflow-x:auto; padding:16px; background:#f1f3f4; white-space:pre-wrap; font:14px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    @media (max-width:720px) {
+      main { width:min(100% - 28px, 1100px); margin-top:28px; }
+      .profile { grid-template-columns:110px 1fr; gap:20px; }
+      .profile img { width:110px; }
+      .bio { grid-column:1/-1; }
+      .publication { grid-template-columns:1fr; }
+      .visual { width:min(100%, 360px); }
+      .abstract, .media-preview { grid-column:1; }
+      h2 { margin-top:44px; }
     }
   </style>
 </head>
-
 <body>
+  <main>
+    <section class="profile" aria-labelledby="name">
+      <img src="photo.jpg" alt="Rui Yang">
+      <div>
+        <h1 id="name">Rui Yang</h1>
+        <div class="bio">
+          <p>Hi, I am Rui Yang, a senior undergraduate student from the School of Computer Science, Peking University (PKU). At Peking University, I worked with Prof. Hao Tang at the PKU TH-AI Lab. I spent a summer working with Prof. Haimin Hu at Johns Hopkins University (JHU), where I joined the Laboratory for Computational Sensing &amp; Robotics (LCSR) and the Alliance AI Lab. My research interests broadly lie in Robotics, Safe Reinforcement Learning, and Computer Vision.</p>
+        </div>
+      </div>
+    </section>
+    <ul class="contact" aria-label="Contact and profile links">
+      <li>📧 <a href="mailto:2300013091@stu.pku.edu.cn">2300013091@stu.pku.edu.cn</a></li>
+      <li>📧 <a href="mailto:ledeix70@gmail.com">ledeix70@gmail.com</a></li>
+      <li><a href="https://github.com/Ledeix" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://huggingface.co/ledeix" target="_blank" rel="noopener">Hugging Face</a></li>
+      <li><a href="https://scholar.google.com/citations?user=JqwQ3FUAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a></li>
+    </ul>
 
-  <div class="profile">
-    <img src="photo.jpg" alt="Rui Yang">
-    <div>
-      <h1>Rui Yang</h1>
-      <p>
-        Hi, I'm currently an undergraduate student from the School of Computer Science,
-        Peking University. I'm interested in Deep Learning, Embodied AI, and Multimodal Models.
-      </p>
+    <section aria-labelledby="publications-heading">
+      <h2 id="publications-heading">Publications</h2>
+      <div class="publications">
+        <article class="publication">
+          <div class="visual">
+            <span class="venue">arXiv</span>
+            <button class="preview-toggle" type="button" data-preview="s2c-media" aria-expanded="false">
+              <img src="assets/publications/s2c-preview.webp" alt="S2C quadruped robot experiments" loading="lazy">
+              <span class="preview-label">▶ Preview</span>
+            </button>
+          </div>
+          <div class="publication-info">
+            <h3>Turning Safety into Competence: Minimally Exploitable Robot Policies via Safety-Filtered Reinforcement Learning</h3>
+            <p class="authors">Ruihan Wu<sup>*</sup>, <strong>Rui Yang<sup>*</sup></strong>, Donggeon David Oh, Duy P. Nguyen, and Haimin Hu</p>
+            <p class="where">arXiv preprint arXiv:2609.27312, 2026 &nbsp;·&nbsp; <sup>*</sup>Equal contribution</p>
+            <div class="actions">
+              <button class="button" type="button" data-abstract="s2c-abstract" aria-expanded="false">Abs</button>
+              <a class="button" href="https://arxiv.org/abs/2609.27312" target="_blank" rel="noopener">arXiv</a>
+              <button class="button" type="button" data-dialog="s2c-bib">Bib</button>
+              <a class="button" href="https://arxiv.org/html/2609.27312" target="_blank" rel="noopener">HTML</a>
+              <a class="button" href="https://arxiv.org/pdf/2609.27312" target="_blank" rel="noopener">PDF</a>
+              <a class="button" href="https://alliance-ai.cs.jhu.edu/s2c/" target="_blank" rel="noopener">Website</a>
+              <a class="button" href="https://github.com/JHU-AllianceLab/go2-safe-zerosum-game" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+          <div class="abstract" id="s2c-abstract">
+            <p>We propose Safety to Competence (S2C), a two-stage reinforcement learning framework that separates safety synthesis from competitive task learning. S2C learns a robust safety filter through adversarial RL, embeds it during task-policy training, and retains it at deployment. In simulated touchdown games and hardware stress tests against a human opponent, S2C improves competitive performance and reduces exploitability while maintaining safety.</p>
+          </div>
+          <div class="media-preview" id="s2c-media">
+            <video controls preload="metadata" poster="assets/publications/s2c-preview.webp">
+              <source src="https://alliance-ai.cs.jhu.edu/s2c/static/videos/s2c_full_demo.mp4" type="video/mp4">
+              Your browser does not support embedded video.
+            </video>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div class="visual">
+            <span class="venue">ICMA 2026</span>
+            <button class="preview-toggle" type="button" data-preview="hydro-media" aria-expanded="false">
+              <img src="assets/publications/deep-hydro-sim-preview.webp" alt="Stonefish and MuJoCo underwater vehicle simulators" loading="lazy">
+              <span class="preview-label">＋ Preview</span>
+            </button>
+          </div>
+          <div class="publication-info">
+            <h3>Deep Hydro-Sim: Structured Residual Hydrodynamics for the RL-Based AUV Control</h3>
+            <p class="authors">Ruihan Wu, Chunying Li, Qirong Lei, Le Huang, Pengcheng Li, and Shuxiang Guo</p>
+            <p class="where">2026 IEEE International Conference on Mechatronics and Automation (ICMA), pp. 1526–1531, 2026</p>
+            <div class="actions">
+              <button class="button" type="button" data-abstract="hydro-abstract" aria-expanded="false">Abs</button>
+              <button class="button" type="button" data-dialog="hydro-bib">Bib</button>
+              <a class="button" href="https://doi.org/10.1109/ICMA69663.2026.11647377" target="_blank" rel="noopener">DOI</a>
+              <a class="button" href="https://ieeexplore.ieee.org/document/11647377" target="_blank" rel="noopener">IEEE</a>
+            </div>
+          </div>
+          <div class="abstract" id="hydro-abstract">
+            <p>Deep Hydro-Sim is a hybrid Stonefish–MuJoCo framework for reinforcement-learning-based autonomous underwater vehicle control. It transfers residual hydrodynamic forces from a high-fidelity underwater simulator into a fast rigid-body simulator through a real-time physics plugin and a physics-informed residual model, improving hydrodynamic fidelity while preserving the throughput needed for RL training.</p>
+          </div>
+          <div class="media-preview" id="hydro-media">
+            <img src="assets/publications/deep-hydro-sim-preview.webp" alt="Comparison of the Stonefish teacher simulator and MuJoCo student simulator">
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="s2c-bib">
+    <div class="dialog-inner">
+      <div class="dialog-head"><h3>BibTeX</h3><button class="icon-button" type="button" data-close aria-label="Close">×</button></div>
+      <pre>@article{s2c2026,
+  title   = {Turning Safety into Competence: Minimally Exploitable Robot Policies via Safety-Filtered Reinforcement Learning},
+  author  = {Wu, Ruihan and Yang, Rui and Oh, Donggeon David and Nguyen, Duy P. and Hu, Haimin},
+  journal = {arXiv preprint arXiv:2609.27312},
+  year    = {2026}
+}</pre>
+      <button class="button" type="button" data-copy>Copy BibTeX</button>
     </div>
-  </div>
+  </dialog>
+  <dialog id="hydro-bib">
+    <div class="dialog-inner">
+      <div class="dialog-head"><h3>BibTeX</h3><button class="icon-button" type="button" data-close aria-label="Close">×</button></div>
+      <pre>@inproceedings{wu2026deephydrosim,
+  title     = {Deep Hydro-Sim: Structured Residual Hydrodynamics for the RL-Based AUV Control},
+  author    = {Wu, Ruihan and Li, Chunying and Lei, Qirong and Huang, Le and Li, Pengcheng and Guo, Shuxiang},
+  booktitle = {2026 IEEE International Conference on Mechatronics and Automation (ICMA)},
+  pages     = {1526--1531},
+  year      = {2026},
+  doi       = {10.1109/ICMA69663.2026.11647377}
+}</pre>
+      <button class="button" type="button" data-copy>Copy BibTeX</button>
+    </div>
+  </dialog>
 
-  <p>📧 Email: <a href="2300013091@stu.pku.edu.cn">2300013091@stu.pku.edu.cn</a></p>
-  <p>📧 Email: <a href="ledeix70@gmail.com">ledeix70@gmail.com</a></p>
-
-  <p>
-    🔗
-    <a href="https://github.com/Ledeix" target="_blank">GitHub</a> |
-    <a href="https://huggingface.co/ledeix" target="_blank">Hugging Face</a> 
-  </p>
-
+  <script>
+    document.querySelectorAll('[data-abstract]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const panel = document.getElementById(button.dataset.abstract);
+        const open = panel.classList.toggle('is-open');
+        button.setAttribute('aria-expanded', open);
+      });
+    });
+    document.querySelectorAll('[data-preview]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const panel = document.getElementById(button.dataset.preview);
+        const open = panel.classList.toggle('is-open');
+        button.setAttribute('aria-expanded', open);
+        if (open) panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+      });
+    });
+    document.querySelectorAll('[data-dialog]').forEach((button) => {
+      button.addEventListener('click', () => document.getElementById(button.dataset.dialog).showModal());
+    });
+    document.querySelectorAll('dialog').forEach((dialog) => {
+      dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+    });
+    document.querySelectorAll('[data-copy]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const bibtex = button.parentElement.querySelector('pre').textContent;
+        await navigator.clipboard.writeText(bibtex);
+        button.textContent = 'Copied!';
+        window.setTimeout(() => { button.textContent = 'Copy BibTeX'; }, 1400);
+      });
+    });
+  </script>
 </body>
 </html>
