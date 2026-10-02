@@ -120,28 +120,34 @@
 
         <article class="publication">
           <div class="visual">
-            <span class="venue">ICMA 2026</span>
-            <button class="preview-toggle" type="button" data-preview="hydro-media" aria-expanded="false">
-              <img src="assets/publications/deep-hydro-sim-preview.webp" alt="Stonefish and MuJoCo underwater vehicle simulators" loading="lazy">
-              <span class="preview-label">＋ Preview</span>
+            <span class="venue">ECCV 2026</span>
+            <button class="preview-toggle" type="button" data-preview="mobilevla-media" aria-expanded="false">
+              <img src="assets/publications/mobilevla-r1-preview.webp" alt="MobileVLA-R1 quadruped robot navigating outdoors" loading="lazy">
+              <span class="preview-label">▶ Preview</span>
             </button>
           </div>
           <div class="publication-info">
-            <h3>Deep Hydro-Sim: Structured Residual Hydrodynamics for the RL-Based AUV Control</h3>
-            <p class="authors">Ruihan Wu, Chunying Li, Qirong Lei, Le Huang, Pengcheng Li, and Shuxiang Guo</p>
-            <p class="where">2026 IEEE International Conference on Mechatronics and Automation (ICMA), pp. 1526–1531, 2026</p>
+            <h3>MobileVLA-R1: Reinforcing Vision-Language-Action for Mobile Robots</h3>
+            <p class="authors">Ting Huang<sup>*</sup>, Dongjian Li<sup>*</sup>, <strong>Rui Yang<sup>*</sup></strong>, Zeyu Zhang<sup>*‡</sup>, Zida Yang, and Hao Tang<sup>‡</sup></p>
+            <p class="where">European Conference on Computer Vision (ECCV), pp. 341–361, 2026 &nbsp;·&nbsp; <sup>*</sup>Equal contribution</p>
             <div class="actions">
-              <button class="button" type="button" data-abstract="hydro-abstract" aria-expanded="false">Abs</button>
-              <button class="button" type="button" data-dialog="hydro-bib">Bib</button>
-              <a class="button" href="https://doi.org/10.1109/ICMA69663.2026.11647377" target="_blank" rel="noopener">DOI</a>
-              <a class="button" href="https://ieeexplore.ieee.org/document/11647377" target="_blank" rel="noopener">IEEE</a>
+              <button class="button" type="button" data-abstract="mobilevla-abstract" aria-expanded="false">Abs</button>
+              <a class="button" href="https://arxiv.org/abs/2511.17889" target="_blank" rel="noopener">arXiv</a>
+              <button class="button" type="button" data-dialog="mobilevla-bib">Bib</button>
+              <a class="button" href="https://arxiv.org/html/2511.17889" target="_blank" rel="noopener">HTML</a>
+              <a class="button" href="https://arxiv.org/pdf/2511.17889" target="_blank" rel="noopener">PDF</a>
+              <a class="button" href="https://aigeeksgroup.github.io/MobileVLA-R1/" target="_blank" rel="noopener">Website</a>
+              <a class="button" href="https://github.com/AIGeeksGroup/MobileVLA-R1" target="_blank" rel="noopener">Code</a>
             </div>
           </div>
-          <div class="abstract" id="hydro-abstract">
-            <p>Deep Hydro-Sim is a hybrid Stonefish–MuJoCo framework for reinforcement-learning-based autonomous underwater vehicle control. It transfers residual hydrodynamic forces from a high-fidelity underwater simulator into a fast rigid-body simulator through a real-time physics plugin and a physics-informed residual model, improving hydrodynamic fidelity while preserving the throughput needed for RL training.</p>
+          <div class="abstract" id="mobilevla-abstract">
+            <p>MobileVLA-R1 is a unified vision-language-action framework that connects natural-language reasoning with continuous quadruped control. It combines multi-granularity chain-of-thought supervision with GRPO reinforcement learning to improve reasoning consistency, control stability, and long-horizon execution. Evaluations on VLN and VLA tasks, together with real-world deployment, demonstrate robust performance in complex environments.</p>
           </div>
-          <div class="media-preview" id="hydro-media">
-            <img src="assets/publications/deep-hydro-sim-preview.webp" alt="Comparison of the Stonefish teacher simulator and MuJoCo student simulator">
+          <div class="media-preview" id="mobilevla-media">
+            <video controls preload="metadata" poster="assets/publications/mobilevla-r1-preview.webp">
+              <source src="https://aigeeksgroup.github.io/MobileVLA-R1/videos/teaser.mp4" type="video/mp4">
+              Your browser does not support embedded video.
+            </video>
           </div>
         </article>
       </div>
@@ -160,16 +166,15 @@
       <button class="button" type="button" data-copy>Copy BibTeX</button>
     </div>
   </dialog>
-  <dialog id="hydro-bib">
+  <dialog id="mobilevla-bib">
     <div class="dialog-inner">
       <div class="dialog-head"><h3>BibTeX</h3><button class="icon-button" type="button" data-close aria-label="Close">×</button></div>
-      <pre>@inproceedings{wu2026deephydrosim,
-  title     = {Deep Hydro-Sim: Structured Residual Hydrodynamics for the RL-Based AUV Control},
-  author    = {Wu, Ruihan and Li, Chunying and Lei, Qirong and Huang, Le and Li, Pengcheng and Guo, Shuxiang},
-  booktitle = {2026 IEEE International Conference on Mechatronics and Automation (ICMA)},
-  pages     = {1526--1531},
-  year      = {2026},
-  doi       = {10.1109/ICMA69663.2026.11647377}
+      <pre>@inproceedings{huang2026mobilevla,
+  title     = {MobileVLA-R1: Reinforcing Vision-Language-Action for Mobile Robots},
+  author    = {Huang, Ting and Li, Dongjian and Yang, Rui and Zhang, Zeyu and Yang, Zida and Tang, Hao},
+  booktitle = {European Conference on Computer Vision},
+  pages     = {341--361},
+  year      = {2026}
 }</pre>
       <button class="button" type="button" data-copy>Copy BibTeX</button>
     </div>
